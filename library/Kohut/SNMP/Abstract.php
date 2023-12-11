@@ -37,7 +37,7 @@ abstract class Kohut_SNMP_Abstract
      */
     public function __construct($ip = null, $timeout = null)
     {
-        if(!extension_loaded('snmp')) {
+        if (!extension_loaded('snmp')) {
             require_once 'Kohut/SNMP/Exception.php';
             throw new Kohut_SNMP_Exception('SNMP extension is not loaded');
         }
@@ -88,7 +88,7 @@ abstract class Kohut_SNMP_Abstract
 
         $this->ip = $ip;
     }
-    
+
     /**
      * Function gets IP address
      *
@@ -117,7 +117,7 @@ abstract class Kohut_SNMP_Abstract
 
         $this->maxTimeout = $microseconds;
     }
-    
+
     /**
      * Function gets maxTimeout
      *
@@ -197,9 +197,8 @@ abstract class Kohut_SNMP_Abstract
      */
     public function getSNMPString($snmpObjectId)
     {
-        $result = $this->get($snmpObjectId);
+        $result = str_replace("STRING: ", "", $this->get($snmpObjectId));
 
         return ($result !== false) ? str_replace('"', '', $result) : false;
     }
-
 }
